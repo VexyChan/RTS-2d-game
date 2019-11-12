@@ -1,6 +1,6 @@
 # RTS-2d-game
 rts 2d game
-james fournier
+<p>james fournier</p>
 All games must feature:
 At least 3 multilayer tiled maps.   1 of 3 done
 maps should include at least 10 unique tile types 6 of 10
