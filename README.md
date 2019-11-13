@@ -13,7 +13,7 @@ rts 2d game
 <li>Barrracks</li>
 <li>Player owned units</li>
 <p>Mouse input mostly working units will patrol along a vector click within 2-3 boxes then click the direction you wand the unit to go</p>
-<p>at least 8 unique sounds associated with game event [2 of 8]</p>
+<p>at least 8 unique sounds associated with game event [6 of 8]</p>
 <p>keep the game entities on the map in reasonable ways done for buildings</p>
 <p>have three resources that can be collected on the map [0 of 3]</p>
 <p>give the player a small number of starting units  [1 unit given]</p>
@@ -26,3 +26,8 @@ rts 2d game
 <p>have a way for units to attack and either destroy units have hp associated with them that will be taken down via aoe check of if unit a is inside of unit b's attack or if a structure is it takes damage untill it has 0 hp then is destroyed | [done]</p>
 <p>For your three maps, offer the player their choice of three maps to play on Done via the main menu // issue until game is compleat only one map playable each map will be done in its own view to allow diffrent spawn for starting buildings and starting units for both sides</p>
 <p>for this initial game, have an enemy base on the opposite side of the map from the player with several starting units (more than the player gets) and a couple of buildings already built enemies get 4 units</p>
+<h1>Things that dont work</h1>
+<li>game doent check to see if enemy building are in the area</li>
+<li>Game will let you place building on water</li>
+<li>Game will let you place on building walls/ bridge</li>\
+<li>fix missing layers on tile map layer 3 and 4 are not found??</li>
