@@ -197,9 +197,9 @@ class GameView(arcade.View):
         self.uMBT4.scale = 1 / 8
         self.Menu2.append(self.uMBT4)
         #setup for enemy+ allys
-        path = pathlib.Path.cwd() / 'Assets' / 'style_D' / 'PNG' / 'idle'
+        path = pathlib.Path.cwd() / 'Assets' / 'orcs' / 'ruler'
         self.eunit = \
-            arcade.AnimatedTimeSprite(0.5, center_x=1000, center_y=320)
+            arcade.AnimatedTimeSprite(0.5, center_x=1050, center_y=320)
         all_files = path.glob('*.png')
         # location moving to
         self.eunit.move_x = self.eunit.center_x
@@ -216,7 +216,7 @@ class GameView(arcade.View):
         self.eunit.textures = textures
         self.enemyUnits.append(self.eunit)
         #new enemy
-        path = pathlib.Path.cwd() / 'Assets' / 'style_B' / 'PNG' / 'idle'
+        path = pathlib.Path.cwd() / 'Assets' / 'orcs' / 'assassini'
         self.bunit = \
             arcade.AnimatedTimeSprite(0.5, center_x=1000, center_y=300)
         all_files = path.glob('*.png')
@@ -235,7 +235,7 @@ class GameView(arcade.View):
         self.bunit.textures = textures
         self.enemyUnits.append(self.bunit)
         # new enemy
-        path = pathlib.Path.cwd() / 'Assets' / 'style_B' / 'PNG' / 'idle'
+        path = pathlib.Path.cwd() / 'Assets' / 'ogres' / 'yidle'
         self.dunit = \
             arcade.AnimatedTimeSprite(0.5, center_x=980, center_y=340)
         all_files = path.glob('*.png')
@@ -253,9 +253,9 @@ class GameView(arcade.View):
             textures.append(frame)
         self.dunit.textures = textures
         self.enemyUnits.append(self.dunit)
-        path = pathlib.Path.cwd() / 'Assets' / 'style_B' / 'PNG' / 'idle'
+        path = pathlib.Path.cwd() / 'Assets' / 'orcs' / 'archer idle'
         self.cunit = \
-            arcade.AnimatedTimeSprite(0.5, center_x=960, center_y=340)
+            arcade.AnimatedTimeSprite(0.5, center_x=940, center_y=340)
         all_files = path.glob('*.png')
         # location moving to
         self.cunit.move_x = self.dunit.center_x
@@ -337,7 +337,11 @@ class GameView(arcade.View):
         my_map = arcade.tilemap.read_tmx(self.map_location)
         self.map = arcade.tilemap.process_layer(my_map, 'Tile Layer 1', 1)
         self.map2 = arcade.tilemap.process_layer(my_map, 'Tile Layer 2', 1)
-        # self.map = arcade.tilemap.process_layer(my_map, 'Tile Layer 3', 1)
+        self.map3 = arcade.tilemap.process_layer(my_map, 'Tile Layer 3', 1)
+        self.map4 = arcade.tilemap.process_layer(my_map, 'Tile Layer 4', 1)
+        #if this did work which for some reason it doesnt i would have an arcade collision check on building each building to make it
+        #tile specific to build these buildings
+
         self.aunit=arcade.Sprite()
 
     def on_draw(self):
@@ -345,6 +349,8 @@ class GameView(arcade.View):
         # draw sprites
         self.map.draw()
         self.map2.draw()
+        self.map3.draw()
+        self.map4.draw()
         self.allyStructs.draw()
         self.enemyStructs.draw()
         self.enemyUnits.draw()
@@ -756,7 +762,6 @@ class GameView(arcade.View):
                     else:
                         curUnit.change_x=0
             for curUnitg in self.allyUnits:
-                print(" i get here")
                 if curUnitg.move_y != curUnitg.center_y:
                     print((curUnitg.move_y - curUnitg.center_y))
                     if (curUnitg.move_y - curUnitg.center_y) < -10:
