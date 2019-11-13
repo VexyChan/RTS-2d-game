@@ -3,6 +3,8 @@ import time
 import arcade
 import pathlib
 
+from arcade import Sprite
+
 WIDTH = 1400
 HEIGHT = 1200
 SPRITE_SCALING = 0.5
@@ -16,8 +18,7 @@ class MenuView(arcade.View):
         super().__init__()
         self.gui = arcade.SpriteList()
         self.pointer = arcade.SpriteList()
-        self.so = arcade.load_sound("Assets/Mysterious-piano.mp3")
-        arcade.play_sound(self.so)
+        self.intro = arcade.play_sound(arcade.load_sound("Assets/Mysterious-piano.mp3"))
         self.cur = arcade.Sprite(pathlib.Path.cwd() / 'Assets' / "coursor.gif")
         self.cur.center_x = 700
         self.cur.center_y = 900
@@ -129,7 +130,19 @@ class GameView(arcade.View):
         self.EHQ.center_x = 1080
         self.EHQ.center_y = 200
         self.EHQ.scale = 1 / 8
-        self.EHQ.HP = 500
+        self.EHQ.HP = 5000
+        self.enemyStructs.append(self.EHQ)
+        self.EHQ = arcade.Sprite(pathlib.Path.cwd() / 'Assets' / "Enemy_Mine.png")
+        self.EHQ.center_x = 1080
+        self.EHQ.center_y = 700
+        self.EHQ.scale = 1 / 8
+        self.EHQ.HP = 1000
+        self.enemyStructs.append(self.EHQ)
+        self.EHQ = arcade.Sprite(pathlib.Path.cwd() / 'Assets' / "Enemy_Mine.png")
+        self.EHQ.center_x = 980
+        self.EHQ.center_y = 400
+        self.EHQ.scale = 1 / 8
+        self.EHQ.HP = 1000
         self.enemyStructs.append(self.EHQ)
         # MENU 1 DEFAULT MENU COORDS
         self.MB1 = arcade.Sprite(pathlib.Path.cwd() / 'Assets' / "Menuback1.png")
@@ -200,7 +213,6 @@ class GameView(arcade.View):
         for file_path in all_files:
             frame = arcade.load_texture(str(file_path))
             textures.append(frame)
-        print(textures)
         self.eunit.textures = textures
         self.enemyUnits.append(self.eunit)
         #new enemy
@@ -220,7 +232,6 @@ class GameView(arcade.View):
         for file_path in all_files:
             frame = arcade.load_texture(str(file_path))
             textures.append(frame)
-        print(textures)
         self.bunit.textures = textures
         self.enemyUnits.append(self.bunit)
         # new enemy
@@ -240,7 +251,6 @@ class GameView(arcade.View):
         for file_path in all_files:
             frame = arcade.load_texture(str(file_path))
             textures.append(frame)
-        print(textures)
         self.dunit.textures = textures
         self.enemyUnits.append(self.dunit)
         path = pathlib.Path.cwd() / 'Assets' / 'style_B' / 'PNG' / 'idle'
@@ -259,7 +269,6 @@ class GameView(arcade.View):
         for file_path in all_files:
             frame = arcade.load_texture(str(file_path))
             textures.append(frame)
-        print(textures)
         self.cunit.textures = textures
         self.enemyUnits.append(self.cunit)
         path = pathlib.Path.cwd() / 'Assets' / 'style_A' / 'PNG' / 'run'
@@ -267,8 +276,8 @@ class GameView(arcade.View):
             arcade.AnimatedTimeSprite(0.5, center_x=200, center_y=1000)
         all_files = path.glob('*.png')
         # location moving to
-        self.junit.move_x = self.dunit.center_x
-        self.junit.move_y = self.dunit.center_y
+        self.junit.move_x = self.junit.center_x
+        self.junit.move_y = self.junit.center_y
         # size of unit
         self.junit.scale = 1 / 2
         # hp of unit
@@ -278,7 +287,6 @@ class GameView(arcade.View):
         for file_path in all_files:
             frame = arcade.load_texture(str(file_path))
             textures.append(frame)
-        print(textures)
         self.junit.textures = textures
         self.allyUnits.append(self.junit)
         # owned Resources
@@ -400,15 +408,18 @@ class GameView(arcade.View):
         elif arcade.check_for_collision(self.pointer[0], self.Menu2[4]):
             self.Unit = "Unit4"
         #collision check for unit selection
+        print(self.Unit)
+        ccurUnit = None
         if(arcade.check_for_collision_with_list(self.cur,self.allyUnits).__len__()>0):
-            self.curUnit = arcade.check_for_collision_with_list(self.cur,self.allyUnits)[0]
-        if (self.curUnit != None) & (200 < self.cur.center_y < 1200) & (200 < self.cur.center_x < 1200):
-            self.curUnit.move_x = self.curUnit.center_x
-            self.curUnit.move_y = self.curUnit.center_y
-            self.curUnit.move_x = self.cur.center_x
-            self.curUnit.move_y = self.cur.center_y
-            self.curUnit = None
-
+            ccurUnit = arcade.check_for_collision_with_list(self.cur,self.allyUnits)[0]
+        if (ccurUnit != None):
+            ccurUnit.change_x=0
+            ccurUnit.change_y=0
+            ccurUnit.move_x = ccurUnit.center_x
+            ccurUnit.move_y = ccurUnit.center_y
+            ccurUnit.move_x = self.cur.center_x
+            ccurUnit.move_y = self.cur.center_y
+            ccurUnit = None
         # serices of If statments that check if the structure was clicked on the menu
         # if the structure is no ontop of another owned structure
         # if the place you wish to place it is within the map
@@ -427,6 +438,8 @@ class GameView(arcade.View):
             self.FARM.HP = 1000
             self.allyStructs.append(self.FARM)
             self.FFO = self.FFO + 1
+            arcade.play_sound(arcade.load_sound("Assets/H3.wav"))
+            arcade.play_sound(arcade.load_sound("Assets/H2.wav"))
             self.structure = None
         if (self.structure == "METALMINE") & \
                 (arcade.check_for_collision_with_list(self.pointer[0], self.allyStructs).__sizeof__() < 21) & \
@@ -441,6 +454,8 @@ class GameView(arcade.View):
             self.MINE.HP = 1000
             self.allyStructs.append(self.MINE)
             self.MFO = self.MFO + 1
+            arcade.play_sound(arcade.load_sound("Assets/H3.wav"))
+            arcade.play_sound(arcade.load_sound("Assets/H2.wav"))
             self.structure = None
         if (self.structure == "WOODCUTTER") & \
                 (arcade.check_for_collision_with_list(self.pointer[0], self.allyStructs).__sizeof__() < 21) & \
@@ -455,6 +470,8 @@ class GameView(arcade.View):
             self.WoodM.HP = 1000
             self.allyStructs.append(self.WoodM)
             self.WFO = self.WFO + 1
+            arcade.play_sound(arcade.load_sound("Assets/H3.wav"))
+            arcade.play_sound(arcade.load_sound("Assets/H2.wav"))
             self.structure = None
         if (self.structure == "BARRACKS") & \
                 (arcade.check_for_collision_with_list(self.pointer[0], self.allyStructs).__sizeof__() < 21) & \
@@ -470,6 +487,8 @@ class GameView(arcade.View):
             self.Barracks.HP = 2000
             self.allyStructs.append(self.Barracks)
             self.structure = None
+            arcade.play_sound(arcade.load_sound("Assets/H3.wav"))
+            arcade.play_sound(arcade.load_sound("Assets/H2.wav"))
         if arcade.check_for_collision(self.pointer[0], self.Barracks) & (self.MB2.center_x == 1700):
             # set menu2
             self.MB2.center_x = self.MB2.center_x - self.offset
@@ -609,10 +628,17 @@ class GameView(arcade.View):
             self.aunit.textures = textures
             self.allyUnits.append(self.aunit)
             self.Unit = None
+
         for i in self.allyStructs:
             if arcade.check_for_collision(self.cur, i):
                 self.Current_HP = i.HP
         for i in self.allyUnits:
+            if arcade.check_for_collision(self.cur, i):
+                self.Current_HP = i.HP
+        for i in self.enemyStructs:
+            if arcade.check_for_collision(self.cur, i):
+                self.Current_HP = i.HP
+        for i in self.enemyUnits:
             if arcade.check_for_collision(self.cur, i):
                 self.Current_HP = i.HP
         self.tc = self.tc + delta_time
@@ -693,39 +719,58 @@ class GameView(arcade.View):
         if self.tc > 1:
             for CurA in self.allyUnits:
                 for CurE in self.enemyUnits:
-                    if -30 < (CurA.center_x - CurE.center_x) < 30 & -30 < (CurA.center_y - CurE.center_y) < 30:
-                        CurA.HP=CurA.HP-CurE.DMG
+                    if (-60 < (CurA.center_x - CurE.center_x) < 60) or (-60 < (CurA.center_y - CurE.center_y) < 60):
+
+                        self.intro = arcade.play_sound(arcade.load_sound("Assets/Sword.mp3"))
+                        CurA.HP = CurA.HP - CurE.DMG
                         CurE.HP = CurE.HP - CurA.DMG
                         if CurE.HP==0:
+                            arcade.play_sound(arcade.load_sound("Assets/death.wav"))
                             CurE.kill()
                         if CurA.HP==0:
+                            arcade.play_sound(arcade.load_sound("Assets/death.wav"))
                             CurA.kill()
                 for CurEB in self.enemyStructs:
-                    if -50 < (CurA.center_x - CurEB.center_x) < 50 & -50 < (CurA.center_y - CurEB.center_y) < 50:
+                    if(-60 < (CurA.center_x - CurEB.center_x) < 60 )or( -60 < (CurA.center_y - CurEB.center_y) < 60):
                         CurEB.HP=CurEB.HP-CurA.DMG
+                        if CurEB.HP==0:
+                            if CurEB == self.EHQ:
+                                #plays on wining a game
+                                arcade.play_sound(arcade.load_sound("Assets/win.wav"))
+                                self.window.show_view(MenuView())
+                            CurEB.kill()
+                            arcade.play_sound(arcade.load_sound("Assets/bp.wav"))
             for curUnit in self.allyUnits:
-                if curUnit.center_x != curUnit.move_x:
-                    #print("Help I havent gone wrong yet i understand X is changing")
-                    #print(curUnit.move_x)
-                    if (curUnit.move_x - curUnit.center_x) > 0:
-                        #rint("i move right")
-                        curUnit.center_x =curUnit.center_x+5
-                    elif (curUnit.move_x - curUnit.center_x) < 0:
-                        curUnit.center_x =curUnit.center_x-5
-                        #print("i move left")
-                    elif (0<(curUnit.move_x - curUnit.center_x)<5 or 0>(curUnit.move_x - curUnit.center_x)>-5):
-                        curUnit.center_x=curUnit.move_x
-                if curUnit.center_y != curUnit.move_y:
-                    #print("Help I havent gone wrong yet i understand y is changing")
-                    #print(curUnit.move_y)
-                    if (curUnit.move_y - curUnit.center_y) > 0:
-                       # print("i move up")
-                        curUnit.center_y = curUnit.center_y + 5
-                    elif (curUnit.move_y - curUnit.center_y) < 0:
-                        #print("i move down")
-                        curUnit.center_y = curUnit.center_y - 5
-                    elif (0<(curUnit.move_y - curUnit.center_y)<5 or 0>(curUnit.move_y - curUnit.center_y)>-5):
-                        curUnit.center_y=curUnit.move_y
+                if curUnit.move_x != curUnit.center_x:
+                    print((curUnit.move_x - curUnit.center_x))
+                    if (curUnit.move_x - curUnit.center_x) < -10:
+                        curUnit.change_x = -1
+                    elif (curUnit.move_x - curUnit.center_x) > 10:
+                        curUnit.change_x = 1
+                    elif (0 <(curUnit.move_x - curUnit.center_x) <= 20 ):
+                        curUnit.move_x = curUnit.center_x
+                        curUnit.change_x = 0
+                    elif (0 > (curUnit.move_x - curUnit.center_x) >= -20):
+                        curUnit.move_x = curUnit.center_x
+                        curUnit.change_x = 0
+                    else:
+                        curUnit.change_x=0
+            for curUnitg in self.allyUnits:
+                print(" i get here")
+                if curUnitg.move_y != curUnitg.center_y:
+                    print((curUnitg.move_y - curUnitg.center_y))
+                    if (curUnitg.move_y - curUnitg.center_y) < -10:
+                        curUnitg.change_y = -1
+                    elif (curUnitg.move_y - curUnitg.center_y) > 10:
+                        curUnitg.change_y = 1
+                    elif (0 < (curUnitg.move_y - curUnitg.center_y) <= 20):
+                        curUnitg.move_y = curUnitg.center_y
+                        curUnitg.change_y = 0
+                    elif (0 > (curUnitg.move_y - curUnitg.center_y) >= -20):
+                        curUnitg.move_y = curUnitg.center_y
+                        curUnitg.change_y = 0
+                    else:
+                        curUnitg.change_y=0
             self.tc = self.tc -1
             self.Wood = self.Wood + (2 * self.WFO)
             self.Metal = self.Metal + (2 * self.MFO)
