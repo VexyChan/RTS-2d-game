@@ -31,3 +31,5 @@ rts 2d game
 <li>Game will let you place building on water</li>
 <li>Game will let you place on building walls/ bridge</li>\
 <li>fix missing layers on tile map layer 3 and 4 are not found??</li>
+Ran out of time for loss conidtion
+changing texture for enemy units
