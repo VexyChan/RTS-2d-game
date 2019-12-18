@@ -11,7 +11,38 @@ SPRITE_SCALING = 0.5
 FRAME_WIDTH = 63
 FRAME_HEIGHT = 79
 
-
+class Node():
+    def __init__(self):
+        self.n=None
+        self.s=None
+        self.e=None
+        self.w=None
+        self.x=None
+        self.y=None
+    def setn(self,val):
+        self.n=val
+    def sets(self,val):
+        self.s=val
+    def sete(self,val):
+        self.e=val
+    def setw(self,val):
+        self.w=val
+    def setx(self,val):
+        self.x=val
+    def sety(self,val):
+        self.y=val
+    def getn(self):
+        return self.n
+    def gets(self):
+        return self.s
+    def sete(self):
+        return self.e
+    def setw(self):
+        return self.w
+    def setx(self):
+        return self.x
+    def sety(self):
+        return self.y
 # noinspection PyTypeChecker
 class MenuView(arcade.View):
     def __init__(self):
@@ -101,6 +132,7 @@ class GameView(arcade.View):
         self.WFO = 1
         self.MFO = 0
         self.FFO = 1
+        self.graph= None
         # menu swap offset
         self.offset = 400
         # sprite lists
@@ -339,6 +371,8 @@ class GameView(arcade.View):
         self.map2 = arcade.tilemap.process_layer(my_map, 'Tile Layer 2', 1)
         self.map3 = arcade.tilemap.process_layer(my_map, 'Tile Layer 3', 1)
         self.map4 = arcade.tilemap.process_layer(my_map, 'Tile Layer 4', 1)
+        self.graph = []
+        
         #if this did work which for some reason it doesnt i would have an arcade collision check on building each building to make it
         #tile specific to build these buildings
 
@@ -394,6 +428,11 @@ class GameView(arcade.View):
         # mouse in game
         self.pointer.draw()
 
+    def on_mouse_release(self, x: float, y: float, button: int,modifiers: int):
+        self.curUnit.move_x = self.cur.center_x
+        self.curUnit.move_y = self.cur.center_y
+        self.curUnit=None
+
     def on_mouse_press(self, _x, _y, _button, _modifiers):
         # looks to see if you clicked on a structure from the build menu
         if arcade.check_for_collision(self.pointer[0], self.Menu1[1]):
@@ -415,17 +454,15 @@ class GameView(arcade.View):
             self.Unit = "Unit4"
         #collision check for unit selection
         print(self.Unit)
-        ccurUnit = None
+        self.curUnit = None
         if(arcade.check_for_collision_with_list(self.cur,self.allyUnits).__len__()>0):
-            ccurUnit = arcade.check_for_collision_with_list(self.cur,self.allyUnits)[0]
-        if (ccurUnit != None):
-            ccurUnit.change_x=0
-            ccurUnit.change_y=0
-            ccurUnit.move_x = ccurUnit.center_x
-            ccurUnit.move_y = ccurUnit.center_y
-            ccurUnit.move_x = self.cur.center_x
-            ccurUnit.move_y = self.cur.center_y
-            ccurUnit = None
+            self.curUnit = arcade.check_for_collision_with_list(self.cur,self.allyUnits)[0]
+            if (self.curUnit != None):
+                self.curUnit.change_x = 0
+                self.curUnit.change_y = 0
+                self.curUnit.move_x = self.curUnit.center_x
+                self.curUnit.move_y = self.curUnit.center_y
+
         # serices of If statments that check if the structure was clicked on the menu
         # if the structure is no ontop of another owned structure
         # if the place you wish to place it is within the map
