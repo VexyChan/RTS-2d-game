@@ -1,6 +1,12 @@
 # RTS-2d-game
 rts 2d game
 <p>james fournier</p>
+<p>COMP 426-001 2D Game Design</p>
+<h1>Controls:</h1>
+<p>The Controls are now click and drag to where you want the unit</p>
+<p>To build a building you click on the building on the menu then click where you wish to place it<p>
+<p>to build units you must have a barracks and click on it</p>
+<p>To return to the building menu when you are on the unit menu you click the hq</p>
 <h1>All games must feature:</h1>
 <p>At least 3 multilayer tiled maps [1 of 3]</p>
 <p>Maps should include at least 10 unique tile types [6 of 10]</p>
