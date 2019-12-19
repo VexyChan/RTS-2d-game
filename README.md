@@ -7,7 +7,7 @@ rts 2d game
 <p>logic isnt setup for idle state vs move state</P>
 <p>Logic explination the logic would be an if statment to set the enemy state to attack if within rannge it would just stop moving</p>
 <P>the enemy once killing the ally unit would go to move state</p>
-<P>for addtioional spawning once a tic timmer inremented to 200 a new enemy would spawn on each diffrent spawn node</p>
+<P>for addtioional spawning once a tic timmer incrssed to 200 a new enemy would spawn on each diffrent spawn node</p>
 <h1>Controls:</h1>
 <p>The Controls are now click and drag to where you want the unit</p>
 <p>To build a building you click on the building on the menu then click where you wish to place it<p>
