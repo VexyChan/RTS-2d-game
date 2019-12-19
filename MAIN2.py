@@ -4,7 +4,8 @@ import arcade
 import pathlib
 
 from arcade import Sprite
-
+#james fournier
+#COMP 426-001 2D Game Design
 WIDTH = 1400
 HEIGHT = 1200
 SPRITE_SCALING = 0.5
@@ -19,30 +20,6 @@ class Node():
         self.w=None
         self.x=None
         self.y=None
-    def setn(self,val):
-        self.n=val
-    def sets(self,val):
-        self.s=val
-    def sete(self,val):
-        self.e=val
-    def setw(self,val):
-        self.w=val
-    def setx(self,val):
-        self.x=val
-    def sety(self,val):
-        self.y=val
-    def getn(self):
-        return self.n
-    def gets(self):
-        return self.s
-    def sete(self):
-        return self.e
-    def setw(self):
-        return self.w
-    def setx(self):
-        return self.x
-    def sety(self):
-        return self.y
 # noinspection PyTypeChecker
 class MenuView(arcade.View):
     def __init__(self):
@@ -133,6 +110,96 @@ class GameView(arcade.View):
         self.MFO = 0
         self.FFO = 1
         self.graph= None
+        self.pathe1=[]
+        self.pathe2 = []
+        self.pathe3 = []
+        self.pathe4 = []
+        for i in range (0,10):
+            self.pathe1.append(Node())
+            self.pathe2.append(Node())
+            self.pathe3.append(Node())
+            self.pathe4.append(Node())
+        self.pathe1[1].y = 300
+        self.pathe1[1].x = 1100
+        self.pathe2[1].y = 260
+        self.pathe2[1].x = 980
+        self.pathe3[1].y = 190
+        self.pathe3[1].x = 800
+        self.pathe4[1].y = 280
+        self.pathe4[1].x = 880
+        #node 2
+        self.pathe1[2].y = 300
+        self.pathe1[2].x = 1100
+        self.pathe2[2].y = 260
+        self.pathe2[2].x = 980
+        self.pathe3[2].y = 190
+        self.pathe3[2].x = 800
+        self.pathe4[2].y = 280
+        self.pathe4[2].x = 880
+        # node 3
+        self.pathe1[3].y = 300
+        self.pathe1[3].x = 1100
+        self.pathe2[3].y = 260
+        self.pathe2[3].x = 980
+        self.pathe3[3].y = 190
+        self.pathe3[3].x = 800
+        self.pathe4[3].y = 280
+        self.pathe4[3].x = 880
+        # node 4
+        self.pathe1[4].y = 300
+        self.pathe1[4].x = 1100
+        self.pathe2[4].y = 260
+        self.pathe2[4].x = 980
+        self.pathe3[4].y = 190
+        self.pathe3[4].x = 800
+        self.pathe4[4].y = 280
+        self.pathe4[4].x = 880
+        # node 5
+        self.pathe1[5].y = 300
+        self.pathe1[5].x = 1100
+        self.pathe2[5].y = 260
+        self.pathe2[5].x = 980
+        self.pathe3[5].y = 190
+        self.pathe3[5].x = 800
+        self.pathe4[5].y = 280
+        self.pathe4[5].x = 880
+        # node 6
+        self.pathe1[6].y = 300
+        self.pathe1[6].x = 1100
+        self.pathe2[6].y = 260
+        self.pathe2[6].x = 980
+        self.pathe3[6].y = 190
+        self.pathe3[6].x = 800
+        self.pathe4[6].y = 280
+        self.pathe4[6].x = 880
+        # node 2
+        self.pathe1[7].y = 300
+        self.pathe1[7].x = 1100
+        self.pathe2[7].y = 260
+        self.pathe2[7].x = 980
+        self.pathe3[7].y = 190
+        self.pathe3[7].x = 800
+        self.pathe4[7].y = 280
+        self.pathe4[7].x = 880
+        # node 8
+        self.pathe1[8].y = 300
+        self.pathe1[8].x = 1100
+        self.pathe2[8].y = 260
+        self.pathe2[8].x = 980
+        self.pathe3[8].y = 190
+        self.pathe3[8].x = 800
+        self.pathe4[8].y = 280
+        self.pathe4[8].x = 880
+        # node 9
+        self.pathe1[9].y = 300
+        self.pathe1[9].x = 1100
+        self.pathe2[9].y = 260
+        self.pathe2[9].x = 980
+        self.pathe3[9].y = 190
+        self.pathe3[9].x = 800
+        self.pathe4[9].y = 280
+        self.pathe4[9].x = 880
+
         # menu swap offset
         self.offset = 400
         # sprite lists
@@ -231,11 +298,8 @@ class GameView(arcade.View):
         #setup for enemy+ allys
         path = pathlib.Path.cwd() / 'Assets' / 'orcs' / 'ruler'
         self.eunit = \
-            arcade.AnimatedTimeSprite(0.5, center_x=1050, center_y=320)
+            arcade.AnimatedTimeSprite(0.5, center_x=self.pathe1[1].x, center_y= self.pathe1[1].y)
         all_files = path.glob('*.png')
-        # location moving to
-        self.eunit.move_x = self.eunit.center_x
-        self.eunit.move_y = self.eunit.center_y
         # size of unit
         self.eunit.scale = 1 / 2
         # hp of unit
@@ -250,11 +314,8 @@ class GameView(arcade.View):
         #new enemy
         path = pathlib.Path.cwd() / 'Assets' / 'orcs' / 'assassini'
         self.bunit = \
-            arcade.AnimatedTimeSprite(0.5, center_x=1000, center_y=300)
+            arcade.AnimatedTimeSprite(0.5, center_x=self.pathe4[1].x, center_y=self.pathe4[1].y)
         all_files = path.glob('*.png')
-        # location moving to
-        self.bunit.move_x = self.bunit.center_x
-        self.bunit.move_y = self.bunit.center_y
         # size of unit
         self.bunit.scale = 1 / 2
         # hp of unit
@@ -269,11 +330,8 @@ class GameView(arcade.View):
         # new enemy
         path = pathlib.Path.cwd() / 'Assets' / 'ogres' / 'yidle'
         self.dunit = \
-            arcade.AnimatedTimeSprite(0.5, center_x=980, center_y=340)
+            arcade.AnimatedTimeSprite(0.5, center_x=self.pathe2[1].x, center_y=self.pathe2[1].y)
         all_files = path.glob('*.png')
-        # location moving to
-        self.dunit.move_x = self.dunit.center_x
-        self.dunit.move_y = self.dunit.center_y
         # size of unit
         self.dunit.scale = 1 / 2
         # hp of unit
@@ -287,11 +345,8 @@ class GameView(arcade.View):
         self.enemyUnits.append(self.dunit)
         path = pathlib.Path.cwd() / 'Assets' / 'orcs' / 'archer idle'
         self.cunit = \
-            arcade.AnimatedTimeSprite(0.5, center_x=940, center_y=340)
-        all_files = path.glob('*.png')
-        # location moving to
-        self.cunit.move_x = self.dunit.center_x
-        self.cunit.move_y = self.dunit.center_y
+            arcade.AnimatedTimeSprite(0.5, center_x=self.pathe3[1].x, center_y=self.pathe3[1].y)
+        all_files = path.glob('*.png')\
         # size of unit
         self.cunit.scale = 1 / 2
         # hp of unit
@@ -583,13 +638,6 @@ class GameView(arcade.View):
             self.aunit.textures = textures
             self.allyUnits.append(self.aunit)
             self.Unit = None
-        """self.aunit.center_x = self.spawn_Point_x
-            self.aunit.center_y = self.spawn_Point_y
-            #what unit may not be needed
-            self.aunit.type="Unit1"
-            #animation type current will replace if state changes
-            self.aunit.State="idle"
-            #qadds aunit to the allysprite list"""
         #self.allyUnits.append(self.aunit)
         #HP Show of last hovered building
         if (self.Unit == "Unit2") & (self.Food > 100) & (self.Wood > 40):
@@ -826,196 +874,14 @@ class GameView(arcade.View):
         self.dunit.update_animation()
         self.cunit.update_animation()
         self.junit.update_animation()
-        '''#change in x and y over all from start to end
-            self.aunit.diff_X = 0
-            self.aunit.diff_y = 0
-            #location moving to to
-            self.aunit.moveX=self.aunit.center_x
-            self.aunit.movey=self.aunit.center_y
-            #moves per update cycle
-            self.aunit.moves=10
-            '''
-            #self.Texture_Handler()
-#removed due to issues with not updateing texture after adding it in on the cycle change
-    '''def Texture_Handler(self):
-            for i in self.allyUnits:
-                if i.State is "idle":
-                    if i.cycle is 0:
-                        print("im going and changing states of the animation image")
-                        if i.type is "Unit1":
-                            print("i should work but i dont try different arg")
-                            i.append_texture(str(pathlib.Path.cwd() / 'Assets' / 'style_A' / 'PNG' / 'idle' / 'frame0000.png'))
-                            i.cycle=1
-                            i.set_texture(0)
-                        if i.type is "Unit2":
-                            i.append_texture(str(pathlib.Path.cwd() / 'Assets' / 'style_B' / 'PNG' / 'idle' / 'frame0000.png'))
-                        if i.type is "Unit3":
-                            i.append_texture(str(pathlib.Path.cwd() / 'Assets' / 'style_C' / 'PNG' / 'idle' / 'frame0000.png'))
-                        if i.type is "Unit4":
-                            i.append_texture(str(pathlib.Path.cwd() / 'Assets' / 'style_D' / 'PNG' / 'idle' / 'frame0000.png'))
-                    elif i.cycle is 1:
-                        if i.type is "Unit1":
-                            print("i get to cycle 2 and i should still work")
-                            i.append_texture(str(pathlib.Path.cwd() / 'Assets' / 'style_A' / 'PNG' / 'idle' / 'frame0001.png'))
-                            i.cycle = 2
-                            i.set_texture(1)
-                            i.update()
-                            if i.type is "Unit2":
-                                i.append_texture(
-                                    str(pathlib.Path.cwd() / 'Assets' / 'style_B' / 'PNG' / 'idle' / 'frame0001.png'))
-                            if i.type is "Unit3":
-                                i.append_texture(
-                                    str(pathlib.Path.cwd() / 'Assets' / 'style_C' / 'PNG' / 'idle' / 'frame0001.png'))
-                            if i.type is "Unit4":
-                                i.append_texture(
-                                    str(pathlib.Path.cwd() / 'Assets' / 'style_D' / 'PNG' / 'idle' / 'frame0001.png'))
-                    elif i.cycle is 2:
-                            if i.type is "Unit1":
-                                i.cycle=3
-                                i.append_texture(str(pathlib.Path.cwd() / 'Assets' / 'style_A' / 'PNG' / 'idle' / 'frame0002.png'))
-                                i.update()
-                                i.set_texture(2)
-                            if i.type is "Unit2":
-                                i.append_texture(
-                                    str(pathlib.Path.cwd() / 'Assets' / 'style_B' / 'PNG' / 'idle' / 'frame0002.png'))
-                            if i.type is "Unit3":
-                                i.append_texture(
-                                    str(pathlib.Path.cwd() / 'Assets' / 'style_C' / 'PNG' / 'idle' / 'frame0002.png'))
-                            if i.type is "Unit4":
-                                i.append_texture(
-                                    str(pathlib.Path.cwd() / 'Assets' / 'style_D' / 'PNG' / 'idle' / 'frame0002.png'))
-                    elif i.cycle is 3:
-                            if i.type is "Unit1":
-                                i.append_texture(str(pathlib.Path.cwd() / 'Assets' / 'style_A' / 'PNG' / 'idle' / 'frame0003.png'))
-                                i.set_texture(3)
-                                i.cycle=4
-                                i.update()
-                            if i.type is "Unit2":
-                                i.append_texture(
-                                    str(pathlib.Path.cwd() / 'Assets' / 'style_B' / 'PNG' / 'idle' / 'frame0003.png'))
-                            if i.type is "Unit3":
-                                i.append_texture(
-                                    str(pathlib.Path.cwd() / 'Assets' / 'style_C' / 'PNG' / 'idle' / 'frame0003.png'))
-                            if i.type is "Unit4":
-                                i.append_texture(
-                                    str(pathlib.Path.cwd() / 'Assets' / 'style_D' / 'PNG' / 'idle' / 'frame0003.png'))
-                    elif i.cycle is 4:
-                            if i.type is "Unit1":
-
-                                i.append_texture(str(pathlib.Path.cwd() / 'Assets' / 'style_A' / 'PNG' / 'idle' / 'frame0004.png'))
-                                i.set_texture(4)
-                                i.cycle=5
-                                i.update()
-                            if i.type is "Unit2":
-                                i.append_texture(
-                                    str(pathlib.Path.cwd() / 'Assets' / 'style_B' / 'PNG' / 'idle' / 'frame0004.png'))
-                            if i.type is "Unit3":
-                                i.append_texture(
-                                    str(pathlib.Path.cwd() / 'Assets' / 'style_C' / 'PNG' / 'idle' / 'frame0004.png'))
-                            if i.type is "Unit4":
-                                i.append_texture(
-                                    str(pathlib.Path.cwd() / 'Assets' / 'style_D' / 'PNG' / 'idle' / 'frame0004.png'))
-                    elif i.cycle is 5:
-                            if i.type is "Unit1":
-                                i.append_texture(str(pathlib.Path.cwd() / 'Assets' / 'style_A' / 'PNG' / 'idle' / 'frame0005.png'))
-                                i.cycle=0
-                                i.set_texture(5)
-                                i.update()
-                            if i.type is "Unit2":
-                                i.append_texture(
-                                    str(pathlib.Path.cwd() / 'Assets' / 'style_B' / 'PNG' / 'idle' / 'frame0005.png'))
-                            if i.type is "Unit3":
-                                i.append_texture(
-                                    str(pathlib.Path.cwd() / 'Assets' / 'style_C' / 'PNG' / 'idle' / 'frame0005.png'))
-                            if i.type is "Unit4":
-                                i.append_texture(
-                                    str(pathlib.Path.cwd() / 'Assets' / 'style_D' / 'PNG' / 'idle' / 'frame0005.png'))
-    '''
-    """
-            #this didnt work sooo yeaaaah made my own animation def by changing from picture to picture ever cycle 
-            self.AUnit = arcade.AnimatedTimeSprite(scale=4,image_x=1106,image_y=756, center_x=700, center_y=700)
-            path = pathlib.Path.cwd() / 'Assets' / 'style_A' / 'spritesheet' / 'spritesheet.png'
-            self.AUnit = arcade.AnimatedTimeSprite(scale=1, center_x=700,center_y=700)
-            self.AUnit.HP = 100
-            self.AUnit.DMG = 25
-            for row in range(4):
-                for col in range(6):
-                    frame = arcade.load_texture(str(path), x=col * FRAME_WIDTH, y=row * FRAME_HEIGHT, width=FRAME_WIDTH,
-                                                height=FRAME_HEIGHT)
-                    self.AUnit.textures.append(frame)
-            print(self.AUnit.textures.__sizeof__())
-            self.AUnit.update_animation()
-            self.AUnit.
-            self.AUnit.draw()
-            #self.allyUnits.append(self.AUnit)
-            self.Unit = None"""
-    """if (curUnit.center_x != curUnit.moveX):
-                        print(curUnit.center_x)
-                        print(curUnit.moveX)
-                        print("i should move to the right")
-                        if (curUnit.diff_X > 0 & curUnit.diff_X >= 5):
-                            curUnit.center_x = curUnit.center_x + 5
-                            curUnit.diff_X = curUnit.diff_X - 5
-                        elif (curUnit.diff_X > 0 & 0 < curUnit.diff_X < 5):
-                            curUnit.center_x=curUnit.center_x + curUnit.diff_X
-                            curUnit.diff_X = 0
-                        print(curUnit.center_x)
-                        print(curUnit.moveX)
-                        print("i do i move?")
-                    if (curUnit.center_y != curUnit.movey):
-                        print(curUnit.center_y)
-                        print(curUnit.movey)
-                        print("i should move up")
-                        if (curUnit.diff_y > 0 & curUnit.diff_y >= 5):
-                            curUnit.center_y = curUnit.center_y + 5
-                            curUnit.diff_y = curUnit.diff_y - 5
-                        elif (curUnit.diff_y > 0 & 0 < curUnit.diff_y < 5):
-                            curUnit.center_y = curUnit.center_y + curUnit.diff_y
-                            curUnit.diff_y = 0
-                        print(curUnit.center_y)
-                        print(curUnit.movey)
-                        print("i do i move?")
-                    if (curUnit.center_x != curUnit.moveX):
-                        print(curUnit.center_x)
-                        print(curUnit.moveX)
-                        print("i should move left")
-                        if ((curUnit.diff_X < 0 )&( curUnit.diff_X <= -5)):
-                            curUnit.center_x = curUnit.center_x - 5
-                            curUnit.diff_X = curUnit.diff_X + 5
-                        elif ((curUnit.diff_X < 0) &( 0 > curUnit.diff_X > -5)):
-                            curUnit.center_x=curUnit.center_x - curUnit.diff_X
-                            curUnit.diff_X = 0
-                        print(curUnit.center_x)
-                        print(curUnit.moveX)
-                        print("i do i move?")
-                    if (curUnit.center_y != curUnit.movey):
-                        print(curUnit.center_y)
-                        print(curUnit.movey)
-                        print("i should move sown")
-                        if ((curUnit.diff_y < 0 )& (0 > curUnit.diff_y <= -5)):
-                            curUnit.center_y = curUnit.center_y - 5
-                            curUnit.diff_y = curUnit.diff_y + 5
-                        elif ((curUnit.diff_y < 0) & (curUnit.diff_y > -5)):
-                            curUnit.center_y = curUnit.center_y - curUnit.diff_y
-                            curUnit.diff_y = 0
-                        print(curUnit.center_x)
-                        print(curUnit.moveX)
-                        print("i do i move?")
-                    print(curUnit.center_x)
-                    print(curUnit.center_y)"""
-
     def on_mouse_motion(self, x, y, dx, dy):
         self.pointer[0].center_x = x
         self.pointer[0].center_y = y
-
-
 def main():
     window = arcade.Window(WIDTH, HEIGHT, "WarFront")
     menu_view = MenuView()
     window.set_mouse_visible(False)
     window.show_view(menu_view)
     arcade.run()
-
-
 if __name__ == "__main__":
     main()
